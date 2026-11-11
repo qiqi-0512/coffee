@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>想想咖啡 Siang Siang Coffee | 台中勤美手作咖啡與甜點</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Serif TC & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oat: '#FDFBF7',
+                        oatDark: '#F4EFE6',
+                        coffee: {
+                            100: '#EFE7DE',
+                            300: '#C2A385',
+                            600: '#73523B',
+                            800: '#3D2A1E',
+                            900: '#2C221E',
+                        },
+                        blush: {
+                            100: '#FBF2EF',
+                            200: '#E8D8D0',
+                            300: '#D8BCB0',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px -5px rgba(44, 34, 30, 0.05)',
+                        'hover': '0 20px 40px -10px rgba(44, 34, 30, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Serif TC', sans-serif;
+            background-color: #FDFBF7;
+            color: #2C221E;
+            overflow-x: hidden;
+        }
+
+        /* 柔和漸變背景 */
+        .bg-hero-pattern {
+            background: linear-gradient(135deg, rgba(253,251,247,0.88) 0%, rgba(248,242,234,0.75) 100%),
+                        url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        /* 客製化滾動條 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D8BCB0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C2A385;
+        }
+
+        /* 動態微效果 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(232, 216, 208, 0.5);
+        }
+
+        /* 蒸汽微飄動動畫 */
+        @keyframes steam {
+            0% { transform: translateY(0) scaleX(1); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-15px) scaleX(1.2); opacity: 0; }
+        }
+        .steam-effect {
+            animation: steam 3s ease-out infinite;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blush-200 selection:text-coffee-900">
+
+    <!-- 導覽列 Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-5 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-coffee-900 text-oat flex items-center justify-center font-serif text-xl font-bold transition-transform duration-300 group-hover:rotate-12 shadow-md">
+                    想
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl font-bold tracking-wider text-coffee-900">想想咖啡</span>
+                    <span class="text-[10px] tracking-widest text-coffee-600 uppercase font-light">Siang Siang Coffee</span>
+                </div>
+            </a>
+
+            <!-- 桌機選單 -->
+            <div class="hidden md:flex items-center space-x-8 font-medium text-sm text-coffee-800">
+                <a href="#about" class="hover:text-coffee-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-coffee-600 hover:after:w-full after:transition-all">關於我們</a>
+                <a href="#features" class="hover:text-coffee-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-coffee-600 hover:after:w-full after:transition-all">品質堅持</a>
+                <a href="#menu" class="hover:text-coffee-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-coffee-600 hover:after:w-full after:transition-all">精選餐點</a>
+                <a href="#lifestyle" class="hover:text-coffee-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-coffee-600 hover:after:w-full after:transition-all">慢生活寫真</a>
+            </div>
+
+            <!-- 右側預約按鈕 -->
+            <div class="hidden md:block">
+                <a href="#reservation" class="px-5 py-2.5 rounded-full bg-coffee-900 text-oat text-sm font-medium hover:bg-coffee-800 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    線上預約座位
+                </a>
+            </div>
+
+            <!-- 手機版選單按鈕 -->
+            <button id="menuBtn" class="md:hidden text-coffee-900 focus:outline-none p-2" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 glass-card border-t border-blush-200 p-6 shadow-xl flex flex-col space-y-4 text-center transition-all">
+            <a href="#about" class="mobile-link text-coffee-800 font-medium py-2">關於我們</a>
+            <a href="#features" class="mobile-link text-coffee-800 font-medium py-2">品質堅持</a>
+            <a href="#menu" class="mobile-link text-coffee-800 font-medium py-2">精選餐點</a>
+            <a href="#lifestyle" class="mobile-link text-coffee-800 font-medium py-2">慢生活寫真</a>
+            <a href="#reservation" class="mobile-link w-full inline-block px-5 py-3 rounded-full bg-coffee-900 text-oat text-sm font-medium shadow-md">線上預約座位</a>
+        </div>
+    </nav>
+
+    <!-- Hero 主視覺區塊 -->
+    <section class="min-h-screen bg-hero-pattern flex items-center justify-center pt-24 pb-16 px-6 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <!-- 柔和標籤 -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blush-100/80 border border-blush-200 text-coffee-800 text-xs tracking-widest uppercase mb-6 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-coffee-600 animate-pulse"></span>
+                Taichung • West District
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-coffee-900 leading-tight mb-6">
+                讓時間停下來，<br class="hidden sm:block"/>想想生活的美好。
+            </h1>
+
+            <p class="text-base sm:text-lg text-coffee-800/80 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+                隱身於台中勤美巷弄間的慢生活角落。嚴選低酸焙度精品咖啡豆，伴隨持久不散的溫潤餘香，搭配每日現做手作蛋糕，陪伴您度過細緻優雅的日光午後。
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#menu" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-coffee-900 text-oat font-medium hover:bg-coffee-800 transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <span>探索菜單</span>
+                    <i class="fa-solid fa-arrow-down text-xs"></i>
+                </a>
+                <a href="#reservation" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-oat border border-coffee-800/20 text-coffee-900 font-medium hover:bg-blush-100 transition-all shadow-sm flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-calendar-check text-sm"></i>
+                    <span>預約座位</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 裝飾性幾何圖形與向下指引 -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+            <span class="text-xs text-coffee-600 font-light tracking-widest">SCROLL</span>
+            <div class="w-5 h-8 border-2 border-coffee-800/40 rounded-full flex justify-center p-1">
+                <div class="w-1 h-2 bg-coffee-800 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色理念 (Features) -->
+    <section id="features" class="py-24 px-6 md:px-12 bg-oat">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-semibold tracking-widest text-coffee-600 uppercase mb-2 block">Our Philosophy</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-coffee-900 mb-4">為什麼選擇「想想」</h2>
+                <div class="w-12 h-0.5 bg-coffee-300 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 特色 1 -->
+                <div class="glass-card p-8 rounded-2xl hover:shadow-hover transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-blush-100 flex items-center justify-center text-coffee-800 text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-coffee-900 mb-3">溫潤不發酸</h3>
+                    <p class="text-coffee-800/70 text-sm leading-relaxed">
+                        嚴選深焙與中焙精品豆，透過精密控溫烘焙去除刺鼻酸質，留下順口圓潤的焦糖與堅果風味，適合不喜歡酸味咖啡的您。
+                    </p>
+                </div>
+
+                <!-- 特色 2 -->
+                <div class="glass-card p-8 rounded-2xl hover:shadow-hover transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-blush-100 flex items-center justify-center text-coffee-800 text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-coffee-900 mb-3">餘香悠長繞樑</h3>
+                    <p class="text-coffee-800/70 text-sm leading-relaxed">
+                        每一杯沖煮都經過標準化黃金萃取流程，入口後的咖啡韻味會在口腔與鼻腔間綿延，回甘持久，令人意猶未盡。
+                    </p>
+                </div>
+
+                <!-- 特色 3 -->
+                <div class="glass-card p-8 rounded-2xl hover:shadow-hover transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-blush-100 flex items-center justify-center text-coffee-800 text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-cake-candles"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-coffee-900 mb-3">每日手作甜點</h3>
+                    <p class="text-coffee-800/70 text-sm leading-relaxed">
+                        甜點師每日晨間純手工製作，減糖配方兼具優雅口感，不論是濃郁提拉米蘇或輕盈戚風，皆與咖啡達到完美平衡。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌故事 (About) -->
+    <section id="about" class="py-20 px-6 md:px-12 bg-oatDark relative">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="relative">
+                <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=80" alt="想想咖啡店內環境" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy">
+                </div>
+                <div class="absolute -bottom-6 -right-6 hidden sm:block glass-card p-6 rounded-2xl shadow-lg max-w-xs border border-white/60">
+                    <p class="font-serif text-coffee-900 font-semibold text-sm mb-1">「在繁華的台中，找到屬於自己的慢步調。」</p>
+                    <span class="text-xs text-coffee-600">— 創辦人 Siang</span>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <span class="text-xs font-semibold tracking-widest text-coffee-600 uppercase">About Siang Siang</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-coffee-900">
+                    在忙碌的生活中，<br/>給自己一段「想想」的時光
+                </h2>
+                <p class="text-coffee-800/80 text-sm md:text-base leading-relaxed">
+                    「想想咖啡」創立於台中勤美商圈的小巷內。我們相信，一杯好咖啡不只是提神的飲品，更是一段與自己對話的儀式。
+                </p>
+                <p class="text-coffee-800/80 text-sm md:text-base leading-relaxed">
+                    我們特別調配適合東方口感的豆款，堅持「低酸度、高醇厚、餘香久」的特色。搭配溫柔的燕麥白木質空間與輕柔音樂，為每位到訪的女孩與年輕朋友，提供一個充滿格調的慢生活據點。
+                </p>
+                <div class="pt-4 flex items-center gap-8">
+                    <div>
+                        <span class="block font-serif text-2xl font-bold text-coffee-900">4.9★</span>
+                        <span class="text-xs text-coffee-600">Google 商家評價</span>
+                    </div>
+                    <div class="w-px h-8 bg-coffee-300/40"></div>
+                    <div>
+                        <span class="block font-serif text-2xl font-bold text-coffee-900">100%</span>
+                        <span class="text-xs text-coffee-600">每日新鮮手作</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 精選菜單 (Menu Preview) -->
+    <section id="menu" class="py-24 px-6 md:px-12 bg-oat">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-semibold tracking-widest text-coffee-600 uppercase mb-2 block">Delicious Selection</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-coffee-900 mb-4">精選菜單</h2>
+                <p class="text-sm text-coffee-800/70">點擊分類探索我們為您準備的細緻風味，點擊愛心可收藏您喜愛的品項</p>
+            </div>
+
+            <!-- 分類標籤篩選 -->
+            <div class="flex justify-center items-center gap-3 mb-12 flex-wrap">
+                <button onclick="filterMenu('all')" class="menu-tab active px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-coffee-900 text-oat shadow-sm" data-category="all">
+                    全部品項
+                </button>
+                <button onclick="filterMenu('coffee')" class="menu-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-blush-100 text-coffee-800 hover:bg-blush-200" data-category="coffee">
+                    嚴選咖啡
+                </button>
+                <button onclick="filterMenu('cake')" class="menu-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-blush-100 text-coffee-800 hover:bg-blush-200" data-category="cake">
+                    手作蛋糕
+                </button>
+                <button onclick="filterMenu('drink')" class="menu-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-blush-100 text-coffee-800 hover:bg-blush-200" data-category="drink">
+                    特調飲品
+                </button>
+            </div>
+
+            <!-- 菜單卡片網格 -->
+            <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 菜單項目由 JavaScript 動態渲染 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 慢生活時光寫真 (Lifestyle Gallery) -->
+    <section id="lifestyle" class="py-20 px-6 md:px-12 bg-oatDark">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-semibold tracking-widest text-coffee-600 uppercase mb-2 block">Gallery</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-coffee-900 mb-4">慢生活角落</h2>
+                <p class="text-sm text-coffee-800/70">陽光、咖啡香與靜謐的午後時光</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="group relative overflow-hidden rounded-2xl aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="咖啡角落" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-coffee-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-oat text-xs tracking-widest font-serif">日光溫室</span>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=600&q=80" alt="甜點製作" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-coffee-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-oat text-xs tracking-widest font-serif">手作時光</span>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="手沖咖啡" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-coffee-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-oat text-xs tracking-widest font-serif">餘香萃取</span>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl aspect-square shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80" alt="靜謐座位" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-coffee-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-oat text-xs tracking-widest font-serif">優雅座位區</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 線上預約與聯絡資訊 (Reservation & Contact) -->
+    <section id="reservation" class="py-24 px-6 md:px-12 bg-oat">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- 左側：店面資訊 -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-xs font-semibold tracking-widest text-coffee-600 uppercase mb-2 block">Visit Us</span>
+                        <h2 class="font-serif text-3xl font-bold text-coffee-900 mb-4">預約您的優雅時光</h2>
+                        <p class="text-coffee-800/70 text-sm leading-relaxed">
+                            歡迎提前線上預約座位。若有特殊活動包場或人數較多需求，亦可直接撥打門市電話洽詢。
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 text-sm text-coffee-800">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-blush-100/50">
+                            <i class="fa-solid fa-location-dot text-coffee-600 text-lg mt-1"></i>
+                            <div>
+                                <span class="font-bold block text-coffee-900">門市地址</span>
+                                <span>台中市西區美村路一段117巷18號（勤美商圈旁）</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-blush-100/50">
+                            <i class="fa-solid fa-clock text-coffee-600 text-lg mt-1"></i>
+                            <div>
+                                <span class="font-bold block text-coffee-900">營業時間</span>
+                                <span>週一至週日 10:00 - 19:00（每週二公休）</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-blush-100/50">
+                            <i class="fa-solid fa-phone text-coffee-600 text-lg mt-1"></i>
+                            <div>
+                                <span class="font-bold block text-coffee-900">連絡電話</span>
+                                <span>(04) 2328-8899</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 社群連結 -->
+                    <div>
+                        <span class="text-xs font-semibold tracking-widest text-coffee-600 uppercase block mb-3">Follow Us</span>
+                        <div class="flex gap-3">
+                            <a href="#" class="w-10 h-10 rounded-full bg-coffee-900 text-oat flex items-center justify-center hover:bg-coffee-600 transition-colors">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-coffee-900 text-oat flex items-center justify-center hover:bg-coffee-600 transition-colors">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-coffee-900 text-oat flex items-center justify-center hover:bg-coffee-600 transition-colors">
+                                <i class="fa-brands fa-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側：預約表單 -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card p-8 sm:p-10 rounded-3xl shadow-soft">
+                        <h3 class="font-serif text-2xl font-bold text-coffee-900 mb-6">線上預約 Table Booking</h3>
+                        
+                        <form id="bookingForm" onsubmit="handleReservation(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-coffee-800 mb-1">姓名 Name *</label>
+                                    <input type="text" id="resName" required placeholder="例如：王小姐" class="w-full px-4 py-3 rounded-xl border border-blush-200 bg-oat/50 focus:outline-none focus:border-coffee-600 text-sm transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-coffee-800 mb-1">電話 Phone *</label>
+                                    <input type="tel" id="resPhone" required placeholder="例如：0912-345678" class="w-full px-4 py-3 rounded-xl border border-blush-200 bg-oat/50 focus:outline-none focus:border-coffee-600 text-sm transition-all">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-coffee-800 mb-1">人數 Guests *</label>
+                                    <select id="resGuests" required class="w-full px-4 py-3 rounded-xl border border-blush-200 bg-oat/50 focus:outline-none focus:border-coffee-600 text-sm transition-all">
+                                        <option value="1">1 位</option>
+                                        <option value="2" selected>2 位</option>
+                                        <option value="3">3 位</option>
+                                        <option value="4">4 位</option>
+                                        <option value="5+">5 位以上</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-coffee-800 mb-1">日期 Date *</label>
+                                    <input type="date" id="resDate" required class="w-full px-4 py-3 rounded-xl border border-blush-200 bg-oat/50 focus:outline-none focus:border-coffee-600 text-sm transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-coffee-800 mb-1">時間 Time *</label>
+                                    <select id="resTime" required class="w-full px-4 py-3 rounded-xl border border-blush-200 bg-oat/50 focus:outline-none focus:border-coffee-600 text-sm transition-all">
+                                        <option value="10:30">10:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="14:00" selected>14:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="17:00">17:00</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-coffee-800 mb-1">特殊需求與備註 Notes</label>
+                                <textarea id="resNotes" rows="3" placeholder="例如：想要靠窗位置、有嬰兒車需求..." class="w-full px-4 py-3 rounded-xl border border-blush-200 bg-oat/50 focus:outline-none focus:border-coffee-600 text-sm transition-all resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-coffee-900 text-oat font-medium hover:bg-coffee-800 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane text-sm"></i>
+                                <span>確認預約座位</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 (Footer) -->
+    <footer class="bg-coffee-900 text-oat/80 py-12 px-6 border-t border-coffee-800">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-oat text-coffee-900 flex items-center justify-center font-serif text-sm font-bold">
+                    想
+                </div>
+                <span class="font-serif text-lg font-bold text-oat">想想咖啡 Siang Siang Coffee</span>
+            </div>
+
+            <p class="text-xs text-oat/60 text-center">
+                © 2026 想想咖啡 Siang Siang Coffee. All Rights Reserved. 台中市西區勤美商圈
+            </p>
+
+            <div class="flex space-x-6 text-xs text-oat/60">
+                <a href="#" class="hover:text-oat transition-colors">隱私權政策</a>
+                <a href="#" class="hover:text-oat transition-colors">服務條款</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 成功預約彈窗 Modal -->
+    <div id="successModal" class="fixed inset-0 z-50 bg-coffee-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-oat rounded-3xl max-w-md w-full p-8 shadow-2xl border border-blush-200 text-center relative animate-fade-in">
+            <div class="w-16 h-16 rounded-full bg-blush-100 text-coffee-800 text-3xl flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-coffee-900 mb-2">預約成功！</h3>
+            <p class="text-sm text-coffee-800/80 mb-6 leading-relaxed" id="modalMsg">
+                我們已收到您的預約資訊，想想咖啡期待您的光臨！
+            </p>
+            <button onclick="closeModal()" class="w-full py-3 rounded-xl bg-coffee-900 text-oat font-medium hover:bg-coffee-800 transition-all">
+                好的，我知道了
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript 邏輯控制 -->
+    <script>
+        // 菜單資料庫
+        const menuItems = [
+            {
+                id: 1,
+                name: '想想特調拿鐵',
+                enName: 'Siang Signature Latte',
+                category: 'coffee',
+                price: 'NT$ 160',
+                desc: '獨家深焙低酸配方豆，融合鮮乳坊小農鮮奶，口感滑順，帶有濃郁堅果香氣。',
+                image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=500&q=80',
+                tag: '招牌必點'
+            },
+            {
+                id: 2,
+                name: '低酸手沖曼特寧',
+                enName: 'Low-Acidity Mandheling',
+                category: 'coffee',
+                price: 'NT$ 180',
+                desc: '特選深焙曼特寧，徹底去除發酸口感，餘香持久，帶有黑巧克力與奶油甜香。',
+                image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80',
+                tag: '餘香悠長'
+            },
+            {
+                id: 3,
+                name: '醇香焦糖瑪奇朵',
+                enName: 'Caramel Macchiato',
+                category: 'coffee',
+                price: 'NT$ 170',
+                desc: '手工熬煮琥珀焦糖，搭配濃縮咖啡與細緻奶泡，甜而不膩的經典享受。',
+                image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=500&q=80',
+                tag: '人氣推介'
+            },
+            {
+                id: 4,
+                name: '草莓輕戚風蛋糕',
+                enName: 'Strawberry Chiffon Cake',
+                category: 'cake',
+                price: 'NT$ 190',
+                desc: '嚴選大湖新鮮草莓，搭配清爽北海道生乳鮮奶油，口感綿密輕盈無負擔。',
+                image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=80',
+                tag: '每日限量'
+            },
+            {
+                id: 5,
+                name: '法式極致提拉米蘇',
+                enName: 'Classic Tiramisu',
+                category: 'cake',
+                price: 'NT$ 180',
+                desc: '浸透想想特調濃縮咖啡與馬斯卡彭乳酪，入口即化，苦甜完美 balanced。',
+                image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=500&q=80',
+                tag: '熱銷第一'
+            },
+            {
+                id: 6,
+                name: '濃郁巴斯克乳酪',
+                enName: 'Basque Cheesecake',
+                category: 'cake',
+                price: 'NT$ 160',
+                desc: '表面微焦香，內餡如絲綢般滑順半熟，濃郁乳酪香與咖啡是絕配。',
+                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=500&q=80',
+                tag: '經典濃純'
+            },
+            {
+                id: 7,
+                name: '宇治抹茶千層蛋糕',
+                enName: 'Matcha Mille Crepe',
+                category: 'cake',
+                price: 'NT$ 200',
+                desc: '層層堆疊的超薄手煎餅皮，夾入京都宇治抹茶內餡，抹香濃郁甘甜。',
+                image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80',
+                tag: '抹迷首選'
+            },
+            {
+                id: 8,
+                name: '微醺玫瑰蜜桃氣泡',
+                enName: 'Rose Peach Sparkling',
+                category: 'drink',
+                price: 'NT$ 150',
+                desc: '有機食用玫瑰花瓣釀造蜜桃糖漿，搭配微氣泡感，夢幻粉嫩視覺與爽口滋味。',
+                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80',
+                tag: '女性最愛'
+            }
+        ];
+
+        // 喜愛收藏狀態
+        let favorites = new Set();
+
+        // DOM 載入後執行
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu('all');
+            setupDateInput();
+
+            // 導覽列滾動陰影變化
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 20) {
+                    nav.classList.add('bg-oat/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                    nav.classList.remove('py-5');
+                } else {
+                    nav.classList.remove('bg-oat/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                    nav.classList.add('py-5');
+                }
+            });
+
+            // 手機版選單開關
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機連結關閉選單
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+
+        // 渲染菜單列表
+        function renderMenu(category) {
+            const menuGrid = document.getElementById('menuGrid');
+            menuGrid.innerHTML = '';
+
+            const filteredItems = category === 'all' 
+                ? menuItems 
+                : menuItems.filter(item => item.category === category);
+
+            filteredItems.forEach(item => {
+                const isFav = favorites.has(item.id);
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl overflow-hidden hover:shadow-hover transition-all duration-300 flex flex-col group';
+                
+                card.innerHTML = `
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        ${item.tag ? `<span class="absolute top-3 left-3 bg-oat/90 backdrop-blur-sm text-coffee-900 text-[11px] font-medium px-2.5 py-1 rounded-full shadow-sm">${item.tag}</span>` : ''}
+                        <button onclick="toggleFavorite(${item.id}, event)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-oat/80 backdrop-blur-sm flex items-center justify-center text-coffee-800 hover:text-red-500 transition-colors shadow-sm" aria-label="Favorite">
+                            <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex justify-between items-start mb-1">
+                                <h4 class="font-serif font-bold text-lg text-coffee-900">${item.name}</h4>
+                                <span class="font-bold text-coffee-600 text-sm">${item.price}</span>
+                            </div>
+                            <span class="text-[11px] text-coffee-600/70 block uppercase tracking-wider mb-2 font-light">${item.enName}</span>
+                            <p class="text-xs text-coffee-800/70 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                `;
+                menuGrid.appendChild(card);
+            });
+        }
+
+        // 篩選菜單
+        function filterMenu(category) {
+            document.querySelectorAll('.menu-tab').forEach(tab => {
+                if (tab.dataset.category === category) {
+                    tab.classList.add('bg-coffee-900', 'text-oat');
+                    tab.classList.remove('bg-blush-100', 'text-coffee-800');
+                } else {
+                    tab.classList.remove('bg-coffee-900', 'text-oat');
+                    tab.classList.add('bg-blush-100', 'text-coffee-800');
+                }
+            });
+            renderMenu(category);
+        }
+
+        // 愛心收藏觸發
+        function toggleFavorite(id, event) {
+            event.stopPropagation();
+            if (favorites.has(id)) {
+                favorites.delete(id);
+            } else {
+                favorites.add(id);
+            }
+            // 取得目前作用的分類
+            const activeTab = document.querySelector('.menu-tab.bg-coffee-900');
+            const currentCategory = activeTab ? activeTab.dataset.category : 'all';
+            renderMenu(currentCategory);
+        }
+
+        // 設定日期輸入框預設為今天
+        function setupDateInput() {
+            const dateInput = document.getElementById('resDate');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+            dateInput.value = today;
+        }
+
+        // 處理預約表單提交
+        function handleReservation(e) {
+            e.preventDefault();
+            const name = document.getElementById('resName').value;
+            const date = document.getElementById('resDate').value;
+            const time = document.getElementById('resTime').value;
+            const guests = document.getElementById('resGuests').value;
+
+            const modalMsg = document.getElementById('modalMsg');
+            modalMsg.innerHTML = `尊貴的 <strong>${name}</strong> 您好，已為您成功預約 <strong>${date} ${time}</strong> 的 <strong>${guests} 人</strong> 座位。<br/>想想咖啡期待與您共享美好的慢生活時光！`;
+
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            // 重置表單
+            document.getElementById('bookingForm').reset();
+            setupDateInput();
+        }
+
+        // 關閉彈窗
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
